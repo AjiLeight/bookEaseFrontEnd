@@ -12,9 +12,13 @@ export default function SignupCard(){
 
 
     return(
+        <>
         <div className="card-header">
         <span className="text-primary" onClick={roleToggleHandler} >{user?"Stall Signup":"User Signup"}</span>
+        </div>
+        <div className="card-body">
             { user?<UserSignup />:<StallSignUp /> }
         </div>
+        </>
     )
 }
