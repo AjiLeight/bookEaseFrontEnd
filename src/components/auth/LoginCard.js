@@ -40,7 +40,7 @@ function LoginCard() {
       })
       .then(() => {
         if (role === "CUSTOMER") {
-          history.push("/customer-home");
+          history.push("/user-home");
         } else {
           history.push("/stall-home");
         }

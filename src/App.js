@@ -2,6 +2,8 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import StallHome from "./pages/StallHome";
+import UserHome from "./pages/UserHome";
 
 function App() {
   return (
@@ -10,10 +12,10 @@ function App() {
         <Login />
       </Route>
       <Route path="/stall-home" exact>
-        <Login />
+        <StallHome />
       </Route>
       <Route path="/user-home" exact>
-        <Login />
+        <UserHome />
       </Route>
     </Switch>
   );
