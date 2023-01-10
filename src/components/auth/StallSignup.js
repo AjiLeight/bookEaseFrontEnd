@@ -33,7 +33,6 @@ export default function StallSignUp() {
       phone: enteredPhone,
       city: enteredCity,
     };
-    console.log(userData);
 
     axios.post("/api/auth/register-stall", userData).then((res) => {
       localStorage.setItem(
@@ -44,7 +43,6 @@ export default function StallSignUp() {
           role: "STALL",
         })
       );
-      console.log(res);
       history.push("/stall-home");
     });
   }
@@ -71,16 +69,32 @@ export default function StallSignUp() {
         ref={addressRef}
         required
       ></input>
+
       <label htmlFor="district" className="mb-2">
         District
       </label>
-      <input
-        type="text"
-        className="form-control align-self-start mb-2"
+      <select
+        name="district"
         id="district"
+        className="form-control align-self-start mb-2"
         ref={districtRef}
-        required
-      ></input>
+      >
+        <option value="Trivandrum">Trivandrum</option>
+        <option value="Kollam">Kollam</option>
+        <option value="Pathanamthitta">Pathanamthitta</option>
+        <option value="Alappuzha">Alappuzha</option>
+        <option value="Kottayam">Kottayam</option>
+        <option value="Idukki">Idukki</option>
+        <option value="Ernakulam">Ernakulam</option>
+        <option value="Thrissur">Thrissur</option>
+        <option value="Palakkad">Palakkad</option>
+        <option value="Malappuram">Malappuram</option>
+        <option value="Kozhikkod">Kozhikkod</option>
+        <option value="Wayanad">Wayanad</option>
+        <option value="Kannur">Kannur</option>
+        <option value="Kasargod">Kasargod</option>
+      </select>
+
       <label htmlFor="city" className="mb-2">
         City
       </label>
