@@ -1,6 +1,6 @@
 import StallRow from "./StallRow";
 
-function StallTabel(props) {
+function StallTable(props) {
   return (
     <>
       {props.stalls.map((stall) => (
@@ -19,4 +19,4 @@ function StallTabel(props) {
   );
 }
 
-export default StallTabel;
+export default StallTable;
