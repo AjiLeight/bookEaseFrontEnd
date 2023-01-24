@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import MainNavigation from "../components/Layout/MainNavigation";
-import BookTable from "../components/user/BookTable";
-import SearchBar from "../components/user/SearchBar";
+import BookTable from "../components/book/BookTable";
+import SearchBar from "../components/book/SearchBar";
 import StallTable from "../components/user/StallTable";
 import axios from "../components/api/axios";
 import { useEffect } from "react";
