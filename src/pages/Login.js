@@ -13,7 +13,7 @@ function Login() {
 
   return (
     <div>
-      <div className="d-flex justify-content-center mt-5">
+      <div className="d-flex justify-content-center  mt-5">
         <AuthNavigation />
         <Card>
           {isAUser ? <LoginCard /> : <SignupCard />}

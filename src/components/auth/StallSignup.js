@@ -41,6 +41,7 @@ export default function StallSignUp() {
           login: "true",
           token: res.data.accessToken,
           role: "STALL",
+          user: enteredEmail,
         })
       );
       history.push("/stall-home");

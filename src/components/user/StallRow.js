@@ -1,4 +1,29 @@
+import { useContext } from "react";
+import ReservationContext from "../../store/reservation-context";
+
 export default function StallRow(props) {
+  const reservationCtx = useContext(ReservationContext);
+  const user = JSON.parse(localStorage.getItem("login")).user;
+
+  function toggleReserveHandler() {
+    reservationCtx.isReserved(props.bookId)
+      ? reservationCtx.cancelReservation(
+          {
+            bookId: props.bookId,
+            stallEmail: props.email,
+            userEmail: user,
+          },
+          user
+        )
+      : reservationCtx.addReservation(
+          {
+            bookId: props.bookId,
+            stallEmail: props.email,
+            userEmail: user,
+          },
+          user
+        );
+  }
   return (
     <div className="card flex-column p-3 w-50 mb-3">
       <span className="fw-bold">{props.name}</span>
@@ -14,11 +39,11 @@ export default function StallRow(props) {
       <div>
         <button
           className="btn btn-outline-primary"
-          onClick={() => {
-            props.onCart(props.name, props.address, props.city);
-          }}
+          onClick={toggleReserveHandler}
         >
-          CART
+          {reservationCtx.isReserved(props.bookId)
+            ? "CANCEL RESERVATION"
+            : "RESERVE"}
         </button>
       </div>
     </div>

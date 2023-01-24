@@ -29,10 +29,11 @@ export default function UserSignup() {
           login: "true",
           token: res.data.accessToken,
           role: "CUSTOMER",
+          user: enteredEmail,
         })
       );
       console.log(res);
-      history.push("/customer-home");
+      history.push("/user-home");
     });
   }
 

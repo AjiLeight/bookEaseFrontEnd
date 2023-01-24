@@ -1,6 +1,6 @@
 import StallRow from "./StallRow";
 
-function StallTabel(props) {
+function StallTable(props) {
   return (
     <>
       {props.stalls.map((stall) => (
@@ -12,11 +12,11 @@ function StallTabel(props) {
           phone={stall.contact}
           district={stall.district}
           email={stall.email}
-          onCart={props.onCart}
+          bookId={props.bookId}
         />
       ))}
     </>
   );
 }
 
-export default StallTabel;
+export default StallTable;
