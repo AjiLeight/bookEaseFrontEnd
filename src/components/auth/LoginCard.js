@@ -34,6 +34,7 @@ function LoginCard() {
             login: "true",
             token: res.data.accessToken,
             role: role,
+            user: enteredEmail,
           })
         );
         console.log(res);

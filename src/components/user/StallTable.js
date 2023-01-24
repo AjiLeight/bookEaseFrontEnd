@@ -12,7 +12,7 @@ function StallTable(props) {
           phone={stall.contact}
           district={stall.district}
           email={stall.email}
-          onCart={props.onCart}
+          bookId={props.bookId}
         />
       ))}
     </>
