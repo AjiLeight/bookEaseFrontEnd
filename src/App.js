@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import StallHome from "./pages/StallHome";
 import UserHome from "./pages/UserHome";
+import Stock from "./pages/Stock";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -16,6 +18,12 @@ function App() {
       </Route>
       <Route path="/user-home" exact>
         <UserHome />
+      </Route>
+      <Route path="/stock-mgmt" exact>
+        <Stock />
+      </Route>
+      <Route path="/cart" exact>
+        <Cart />
       </Route>
     </Switch>
   );

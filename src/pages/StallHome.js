@@ -27,7 +27,7 @@ function StallHome() {
     <>
       <StallNavigation page="home" />
       <div className="d-flex p-2 justify-content-center">
-        <SearchUserBar searchHandler={onSearch} />
+        <SearchUserBar searchHandler={onSearch} searchFor="user" />
       </div>
       <div className="d-flex flex-column align-items-center p-2 ">
         {filteredReservations.length ? (

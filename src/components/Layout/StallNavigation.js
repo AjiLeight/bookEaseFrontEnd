@@ -16,7 +16,7 @@ export default function StallNavigation(props) {
         <div className="navbar-nav me-auto mb-2 mb-lg-0"></div>
         {props.page === "home" ? (
           <Link
-            to="/book-mgmt"
+            to="/stock-mgmt"
             className="btn border--subtle text-dark m-3 fw-bold"
           >
             STOCK
