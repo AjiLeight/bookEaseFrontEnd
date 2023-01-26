@@ -6,6 +6,7 @@ import StallHome from "./pages/StallHome";
 import UserHome from "./pages/UserHome";
 import Stock from "./pages/Stock";
 import Cart from "./pages/Cart";
+import AddBook from "./pages/AddBook";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
       </Route>
       <Route path="/cart" exact>
         <Cart />
+      </Route>
+      <Route path="/add-book" exact>
+        <AddBook />
       </Route>
     </Switch>
   );

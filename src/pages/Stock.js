@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import axios from "../components/api/axios";
 import StallNavigation from "../components/Layout/StallNavigation";
 import SearchUserBar from "../components/stall/SearchUserBar";
+import AddStockTable from "../components/stock/AddStockTable";
 import StockTable from "../components/stock/StockTable";
+import { Link } from "react-router-dom";
 
 export default function Stock() {
   const [stock, setStock] = useState([]);
   const [filterstock, setFilterStock] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
+  const [addStock, setAddStock] = useState(false);
+  const [books, setBooks] = useState([]);
+
   const user = JSON.parse(localStorage.getItem("login")).user;
 
   useEffect(() => {
@@ -42,22 +47,57 @@ export default function Stock() {
     setFilterStock(temp);
   }
 
+  async function onAddSearchHandler(data) {
+    console.log(data);
+    if (data !== "") {
+      axios.get(`api/v1/book/search/name/${data}`).then(async (res) => {
+        setBooks(await res.data);
+      });
+    }
+  }
+
+  function toggleAddStock() {
+    setAddStock(!addStock);
+  }
+
+  const searchStockElement = (
+    <>
+      <div className="d-flex p-2 justify-content-center">
+        <SearchUserBar searchHandler={onSearchHandler} />
+      </div>
+      <div className="d-flex flex-column align-items-center p-2 ">
+        {filterstock.length !== 0 ? (
+          <StockTable stocks={filterstock} />
+        ) : (
+          <button className="btn fw-bold fs-4" onClick={toggleAddStock}>
+            + Add A New Stock?
+          </button>
+        )}
+      </div>
+    </>
+  );
+
+  const addStockElement = (
+    <>
+      <div className="d-flex flex-row p-2 justify-content-center">
+        <SearchUserBar searchHandler={onAddSearchHandler} />
+      </div>
+      <div className="d-flex flex-column align-items-center p-2 ">
+        <Link to="/add-book" className="btn text-primary mb-3">
+          Can't find the book?
+        </Link>
+        <AddStockTable books={books} />
+      </div>
+    </>
+  );
+
+  const stockElement = addStock ? addStockElement : searchStockElement;
+
   return (
     <>
+      <StallNavigation />
       {isMounted ? (
-        <>
-          <StallNavigation />
-          <div className="d-flex p-2 justify-content-center">
-            <SearchUserBar searchHandler={onSearchHandler} />
-          </div>
-          <div className="d-flex flex-column align-items-center p-2 ">
-            {filterstock.length !== 0 ? (
-              <StockTable stocks={filterstock} />
-            ) : (
-              "empty"
-            )}
-          </div>
-        </>
+        stockElement
       ) : (
         <div className="d-flex flex-column align-items-center p-2 ">
           Loading

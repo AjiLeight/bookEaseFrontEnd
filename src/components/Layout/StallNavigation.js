@@ -10,7 +10,9 @@ export default function StallNavigation(props) {
   return (
     <nav className="navbar navbar-expand-lg border-bottom shadow-sm">
       <div className="container-fluid">
-        <span className="navbar-brand fs-3 text-dark fw-bold">BOOK-EASE</span>
+        <Link to="/stall-home" className="navbar-brand fs-3 text-dark fw-bold">
+          BOOK-EASE
+        </Link>
       </div>
       <div className="collapse navbar-collapse" id="navbarText">
         <div className="navbar-nav me-auto mb-2 mb-lg-0"></div>
