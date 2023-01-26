@@ -7,7 +7,7 @@ export default function SearchUserBar(props) {
     <div className="d-flex mt-4">
       <input
         type="text"
-        placeholder="search book"
+        placeholder="search...."
         className="form-control m-2"
         style={{ width: "25rem" }}
         ref={searchRef}
@@ -16,7 +16,7 @@ export default function SearchUserBar(props) {
         }}
       ></input>
       <button
-        className="btn btn-outline-primary m-2"
+        className="btn btn-outline-dark m-2"
         onClick={() => {
           props.searchHandler(searchRef.current.value);
         }}
