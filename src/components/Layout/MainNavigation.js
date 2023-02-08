@@ -1,9 +1,8 @@
 import { useContext } from "react";
-import { Link, useHistory, useRouteMatch } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ReservationContext from "../../store/reservation-context";
 
 export default function MainNavigation(props) {
-  let match = useRouteMatch();
   const history = useHistory();
   const reservationCtx = useContext(ReservationContext);
 
@@ -21,7 +20,7 @@ export default function MainNavigation(props) {
           {props.current !== "home" ? (
             <Link
               className="btn border--subtle text-dark m-3 fw-bold"
-              to={match.url}
+              to={"user-home"}
             >
               HOME
             </Link>
@@ -35,7 +34,7 @@ export default function MainNavigation(props) {
               </button>
               <Link
                 className="btn border--subtle text-dar fw-bold"
-                to={`${match.url}/cart`}
+                to={`/cart`}
               >
                 RESERVATIONS
               </Link>

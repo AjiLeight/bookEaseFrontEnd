@@ -1,10 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import MainNavigation from "../components/Layout/MainNavigation";
 import BookTable from "../components/book/BookTable";
 import SearchBar from "../components/book/SearchBar";
 import StallTable from "../components/user/StallTable";
 import axios from "../components/api/axios";
-import { useEffect } from "react";
 import ReservationContext from "../store/reservation-context";
 
 function UserHome() {
@@ -17,12 +16,7 @@ function UserHome() {
 
   useEffect(() => {
     async function getData() {
-      await axios.get(`/api/v1/reservation/user/${user}`).then(async (res) => {
-        localStorage.setItem("reservations", JSON.stringify(await res.data));
-        reservationCtx.setReservation(
-          JSON.parse(localStorage.getItem("reservations"))
-        );
-      });
+      await reservationCtx.getReservations(user);
     }
     getData();
   }, [user]);
