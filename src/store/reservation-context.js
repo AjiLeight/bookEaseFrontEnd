@@ -8,6 +8,7 @@ const ReservationContext = createContext({
   isReserved: (bookId) => {},
   cancelReservation: (reservation, user) => {},
   setReservation: (reservationList) => {},
+  getReservations: (user) => {},
 });
 
 export function ReservationContextProvider(props) {
@@ -16,6 +17,7 @@ export function ReservationContextProvider(props) {
   async function getReservations(user) {
     await axios.get(`/api/v1/reservation/user/${user}`).then(async (res) => {
       setUserReservations(await res.data);
+      localStorage.setItem("reservations", JSON.stringify(await res.data));
     });
   }
 
@@ -38,11 +40,10 @@ export function ReservationContextProvider(props) {
   }
 
   async function cancelReservationHandler(reservation, user) {
-    console.log(reservation);
     await axios
       .delete("/api/v1/reservation", { data: reservation })
       .then(async (res) => {
-        console.log(res.data);
+        console.log(await res.data);
       });
     await getReservations(user);
   }
@@ -54,6 +55,7 @@ export function ReservationContextProvider(props) {
     isReserved: isReservedHandler,
     cancelReservation: cancelReservationHandler,
     setReservation: setReservationHandler,
+    getReservations: getReservations,
   };
 
   return (
