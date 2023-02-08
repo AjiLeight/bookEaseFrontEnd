@@ -16,7 +16,7 @@ function SearchBar(props) {
       <button
         className="btn btn-outline-primary m-2"
         onClick={() => {
-          props.onSearchBook(searchDataRef.current.value);
+          props.onSearch(searchDataRef.current.value);
         }}
       >
         search
@@ -31,7 +31,15 @@ function SearchBar(props) {
         placeholder="search stall"
         className="form-control m-2"
         style={{ width: "25rem" }}
-      ></input>
+      />
+      <button
+        className="btn btn-outline-primary m-2"
+        onClick={() => {
+          props.onSearch(searchDataRef.current.value);
+        }}
+      >
+        search
+      </button>
     </>
   );
 

@@ -26,12 +26,6 @@ export default function MainNavigation(props) {
             </Link>
           ) : (
             <>
-              <button
-                className="btn border--subtle text-dark m-3 fw-bold"
-                onClick={() => history.go(0)}
-              >
-                HOME
-              </button>
               <Link
                 className="btn border--subtle text-dar fw-bold"
                 to={`/cart`}
