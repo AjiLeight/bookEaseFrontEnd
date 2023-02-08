@@ -5,6 +5,7 @@ import SearchBar from "../components/book/SearchBar";
 import StallTable from "../components/user/StallTable";
 import axios from "../components/api/axios";
 import ReservationContext from "../store/reservation-context";
+import { useHistory } from "react-router-dom";
 
 function UserHome() {
   const [currPageContext, setCurrentPageContext] = useState("book");
@@ -13,6 +14,7 @@ function UserHome() {
   const [book, setBook] = useState({});
   const user = JSON.parse(localStorage.getItem("login")).user;
   const reservationCtx = useContext(ReservationContext);
+  const history = useHistory(0);
 
   useEffect(() => {
     async function getData() {
@@ -52,7 +54,7 @@ function UserHome() {
   const searchBookElement = (
     <>
       <div className="d-flex p-2 justify-content-center">
-        <SearchBar searchFor="book" onSearchBook={searchBookHandler} />
+        <SearchBar searchFor="book" onSearch={searchBookHandler} />
       </div>
       <div className="d-flex flex-column align-items-center p-2 ">
         {bookResult.length !== 0 ? (
@@ -70,8 +72,15 @@ function UserHome() {
 
   const searchStallElement = (
     <>
-      <div className="d-flex p-2 justify-content-center">
-        <SearchBar searchFor="stall" />
+      <div className="d-flex p-2 justify-content-start">
+        <button
+          className="btn text-primary ms-4"
+          onClick={() => {
+            setCurrentPageContext("book");
+          }}
+        >
+          search Another Book
+        </button>
       </div>
       <div className="d-flex flex-column align-items-center p-2">
         {stallResult.length !== 0 ? (
