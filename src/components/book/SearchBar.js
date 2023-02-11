@@ -16,14 +16,13 @@ function SearchBar(props) {
       <button
         className="btn btn-outline-primary m-2"
         onClick={() => {
-          props.onSearchBook(searchDataRef.current.value);
+          props.onSearch(searchDataRef.current.value);
         }}
       >
         search
       </button>
     </>
   );
-
   return (
     <div className="d-flex mt-4">
       {currentSearch === "book" ? searchBookElement : <></>}

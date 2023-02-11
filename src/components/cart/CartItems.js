@@ -43,19 +43,19 @@ export default function CartItems({ reservation }) {
 
   return (
     <>
-      <div className="card w-50 mb-4">
+      <div className="card w-50 m-4">
         <div className="card-header p-3">
-          <div className="fw-bold fs-2">{book.bookName}</div>
-          <div className="fs-6">{book.author}</div>
+          <div className="fw-bold fs-4">{book.bookName}</div>
+          <div className="fs-7">{book.author}</div>
         </div>
         <div className="card-body p-3">
-          <span className="fw-bold fs-5">{stall.name}</span>
+          <span className="fw-bold fs-6">{stall.name}</span>
           <br />
-          <span className="fs-6">{stall.address}</span>
+          <span className="fs-7">{stall.address}</span>
           <br />
-          <span className="fs-6">{stall.district}</span>
+          <span className="fs-7">{stall.district}</span>
           <br />
-          <span className="fs-6">{book.price}</span>
+          <span className="fs-7">{book.price}</span>
         </div>
         <div className="card-footer p-3">
           <button className="btn btn-danger" onClick={cancelHandler}>
