@@ -37,14 +37,16 @@ export default function StallRow(props) {
         <br />
       </p>
       <div>
-        <button
-          className="btn btn-outline-primary"
-          onClick={toggleReserveHandler}
-        >
-          {reservationCtx.isReserved(props.bookId, props.email)
-            ? "CANCEL RESERVATION"
-            : "RESERVE"}
-        </button>
+        {props.bookId && (
+          <button
+            className="btn btn-outline-primary"
+            onClick={toggleReserveHandler}
+          >
+            {reservationCtx.isReserved(props.bookId, props.email)
+              ? "CANCEL RESERVATION"
+              : "RESERVE"}
+          </button>
+        )}
       </div>
     </div>
   );

@@ -1,8 +1,11 @@
 function AuthNavigation() {
   return (
-    <nav className="navbar bg-primary p-3" style={{ color: "#f6f7f7" }}>
+    <nav
+      className="navbar bg-light p-3 shadow border"
+      style={{ color: "#f6f7f7" }}
+    >
       <div className="container-fluid">
-        <span className="navbar-brand fs-3 text-white fw-bold">BOOK-EASE</span>
+        <span className="navbar-brand fs-3 text-dark fw-bold">BOOK-EASE</span>
       </div>
     </nav>
   );

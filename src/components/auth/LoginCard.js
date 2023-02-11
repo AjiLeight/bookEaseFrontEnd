@@ -4,16 +4,11 @@ import { useHistory } from "react-router-dom";
 import axios from "../api/axios";
 
 function LoginCard() {
-  const [role, setRole] = useState("CUSTOMER");
   const [errorMessage, setErrorMessage] = useState("");
 
   const history = useHistory();
   const emailRef = useRef();
   const passwordRef = useRef();
-
-  function roleHandler(event) {
-    setRole(event.target.value);
-  }
 
   async function loginHandler(event) {
     event.preventDefault();

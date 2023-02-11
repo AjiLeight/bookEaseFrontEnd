@@ -30,7 +30,13 @@ export default function MainNavigation(props) {
                 className="btn border--subtle text-dar fw-bold"
                 to={`/cart`}
               >
-                RESERVATIONS
+                <img
+                  src={require("../../assets/images/cart.png")}
+                  alt="cart"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="cart"
+                ></img>
               </Link>
               <span className="badge bg-secondary">
                 {reservationCtx.totalReservations}
@@ -40,8 +46,14 @@ export default function MainNavigation(props) {
           <button
             className="btn border--subtle text-dar m-3 fw-bold"
             onClick={onClickHandler}
+            data-toggle="tooltip"
+            data-placement="top"
+            title="logout"
           >
-            LOGOUT
+            <img
+              src={require("../../assets/images/logout.png")}
+              alt="logout"
+            ></img>
           </button>
         </div>
       </div>
