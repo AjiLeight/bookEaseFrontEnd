@@ -24,20 +24,9 @@ function SearchBar(props) {
     </>
   );
 
-  const searchStallElement = (
-    <>
-      <input
-        type="text"
-        placeholder="search stall"
-        className="form-control m-2"
-        style={{ width: "25rem" }}
-      ></input>
-    </>
-  );
-
   return (
     <div className="d-flex mt-4">
-      {currentSearch === "book" ? searchBookElement : searchStallElement}
+      {currentSearch === "book" ? searchBookElement : <></>}
     </div>
   );
 }

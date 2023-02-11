@@ -70,8 +70,13 @@ function UserHome() {
 
   const searchStallElement = (
     <>
-      <div className="d-flex p-2 justify-content-center">
-        <SearchBar searchFor="stall" />
+      <div className="d-flex p-2 justify-content-start">
+        <button
+          className="btn text-primary"
+          onClick={() => setCurrentPageContext("book")}
+        >
+          go to book search
+        </button>
       </div>
       <div className="d-flex flex-column align-items-center p-2">
         {stallResult.length !== 0 ? (

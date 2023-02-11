@@ -66,13 +66,13 @@ export default function Stock() {
         <SearchUserBar searchHandler={onSearchHandler} />
       </div>
       <div className="d-flex flex-column align-items-center p-2 ">
-        {filterstock.length !== 0 ? (
-          <StockTable stocks={filterstock} />
-        ) : (
-          <button className="btn fw-bold fs-4" onClick={toggleAddStock}>
-            + Add A New Stock?
-          </button>
-        )}
+        <button
+          className="btn text-primary fw-bold fs-6 mb-2"
+          onClick={toggleAddStock}
+        >
+          + Add A New Stock?
+        </button>
+        {filterstock.length !== 0 ? <StockTable stocks={filterstock} /> : <></>}
       </div>
     </>
   );
@@ -86,7 +86,7 @@ export default function Stock() {
         <Link to="/add-book" className="btn text-primary mb-3">
           Can't find the book?
         </Link>
-        <AddStockTable books={books} />
+        <AddStockTable books={books} stock={stock} />
       </div>
     </>
   );
