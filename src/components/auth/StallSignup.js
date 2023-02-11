@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
+import { districts } from "../../constants/constants";
 import axios from "../api/axios";
 
 export default function StallSignUp() {
@@ -80,20 +81,11 @@ export default function StallSignUp() {
         className="form-control align-self-start mb-2"
         ref={districtRef}
       >
-        <option value="Trivandrum">Trivandrum</option>
-        <option value="Kollam">Kollam</option>
-        <option value="Pathanamthitta">Pathanamthitta</option>
-        <option value="Alappuzha">Alappuzha</option>
-        <option value="Kottayam">Kottayam</option>
-        <option value="Idukki">Idukki</option>
-        <option value="Ernakulam">Ernakulam</option>
-        <option value="Thrissur">Thrissur</option>
-        <option value="Palakkad">Palakkad</option>
-        <option value="Malappuram">Malappuram</option>
-        <option value="Kozhikkod">Kozhikkod</option>
-        <option value="Wayanad">Wayanad</option>
-        <option value="Kannur">Kannur</option>
-        <option value="Kasargod">Kasargod</option>
+        {districts.map((district) => (
+          <option key={district} value={district}>
+            {district}
+          </option>
+        ))}
       </select>
 
       <label htmlFor="city" className="mb-2">

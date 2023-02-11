@@ -34,8 +34,14 @@ export default function StallNavigation(props) {
         <button
           className="btn border--subtle text-dar m-3 fw-bold"
           onClick={onLogoutHandler}
+          data-toggle="tooltip"
+          data-placement="top"
+          title="logout"
         >
-          LOGOUT
+          <img
+            src={require("../../assets/images/logout.png")}
+            alt="logout"
+          ></img>
         </button>
       </div>
     </nav>
