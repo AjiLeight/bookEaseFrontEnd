@@ -20,7 +20,7 @@ function UserHome() {
       await reservationCtx.getReservations(user);
     }
     getData();
-  }, [user, reservationCtx]);
+  }, [user]);
 
   function toggleContext() {
     setCurrentPageContext(contextRef.current.value);
