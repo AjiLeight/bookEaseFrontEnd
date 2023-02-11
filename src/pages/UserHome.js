@@ -82,6 +82,14 @@ function UserHome() {
   const searchStallElement = (
     <>
       <div className="d-flex flex-column align-items-center p-2">
+        <button
+          className="btn text-primary"
+          onClick={() => {
+            toggleContext("book");
+          }}
+        >
+          Search Another Book
+        </button>
         {stallResult.length !== 0 ? (
           <StallTable stalls={stallResult} bookId={book.id} />
         ) : (
