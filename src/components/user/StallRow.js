@@ -6,7 +6,7 @@ export default function StallRow(props) {
   const user = JSON.parse(localStorage.getItem("login")).user;
 
   function toggleReserveHandler() {
-    reservationCtx.isReserved(props.bookId)
+    reservationCtx.isReserved(props.bookId, props.email)
       ? reservationCtx.cancelReservation(
           {
             bookId: props.bookId,
@@ -41,7 +41,7 @@ export default function StallRow(props) {
           className="btn btn-outline-primary"
           onClick={toggleReserveHandler}
         >
-          {reservationCtx.isReserved(props.bookId)
+          {reservationCtx.isReserved(props.bookId, props.email)
             ? "CANCEL RESERVATION"
             : "RESERVE"}
         </button>

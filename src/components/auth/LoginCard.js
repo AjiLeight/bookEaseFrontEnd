@@ -5,6 +5,7 @@ import axios from "../api/axios";
 
 function LoginCard() {
   const [role, setRole] = useState("CUSTOMER");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const history = useHistory();
   const emailRef = useRef();
@@ -28,6 +29,7 @@ function LoginCard() {
     await axios
       .post("/api/auth/login", userData)
       .then((res) => {
+        const role = res.data.role;
         localStorage.setItem(
           "login",
           JSON.stringify({
@@ -38,12 +40,17 @@ function LoginCard() {
           })
         );
         console.log(res);
-      })
-      .then(() => {
         if (role === "CUSTOMER") {
           history.push("/user-home");
         } else {
           history.push("/stall-home");
+        }
+      })
+      .catch((error) => {
+        const message = error.response.data.message;
+        console.log(message);
+        if (message === "Bad credentials") {
+          setErrorMessage("Wrong Username or Password");
         }
       });
   }
@@ -52,7 +59,7 @@ function LoginCard() {
     <div className="card-body">
       <form>
         <label htmlFor="username" className="mb-2">
-          Username
+          Email
         </label>
         <input
           className="form-control align-self-start mb-2"
@@ -73,37 +80,16 @@ function LoginCard() {
           id="password"
           required
         ></input>
-        <div className="form-check mb-2">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="role"
-            id="user"
-            value="CUSTOMER"
-            onClick={roleHandler}
-            defaultChecked
-          />
-          <label className="form-check-label" htmlFor="user">
-            User
-          </label>
-        </div>
-        <div className="form-check mb-2">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="role"
-            id="stall"
-            value="STALL"
-            onClick={roleHandler}
-          />
-          <label className="form-check-label" htmlFor="stall">
-            Stall
-          </label>
-        </div>
-        <button className="btn btn-outline-primary" onClick={loginHandler}>
+        <button
+          className="btn btn-outline-primary mt-2 mb-2"
+          onClick={loginHandler}
+        >
           Login
         </button>
       </form>
+      <span className="text-danger mt-3">
+        {errorMessage ? errorMessage : <></>}
+      </span>
     </div>
   );
 }

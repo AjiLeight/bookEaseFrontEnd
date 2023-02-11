@@ -5,7 +5,7 @@ const ReservationContext = createContext({
   reservations: [],
   totalReservations: 0,
   addReservation: (reservation, user) => {},
-  isReserved: (bookId) => {},
+  isReserved: (bookId, email) => {},
   cancelReservation: (reservation, user) => {},
   setReservation: (reservationList) => {},
   getReservations: (user) => {},
@@ -33,9 +33,10 @@ export function ReservationContextProvider(props) {
     console.log(userReservations);
   }
 
-  function isReservedHandler(bookId) {
+  function isReservedHandler(bookId, email) {
     return userReservations.some(
-      (reservation) => reservation.bookId === bookId
+      (reservation) =>
+        reservation.bookId === bookId && reservation.stallEmail === email
     );
   }
 
