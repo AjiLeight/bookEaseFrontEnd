@@ -16,6 +16,9 @@ function UserHome() {
   const contextRef = useRef();
 
   useEffect(() => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${
+      JSON.parse(localStorage.getItem("login")).token
+    }`;
     async function getData() {
       await reservationCtx.getReservations(user);
     }

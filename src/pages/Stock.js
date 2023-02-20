@@ -16,6 +16,9 @@ export default function Stock() {
   const user = JSON.parse(localStorage.getItem("login")).user;
 
   useEffect(() => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${
+      JSON.parse(localStorage.getItem("login")).token
+    }`;
     async function fetchStock(user) {
       await axios.get(`/api/v1/stock/${user}`).then(async (res) => {
         await res.data.forEach(async (tempStock) => {

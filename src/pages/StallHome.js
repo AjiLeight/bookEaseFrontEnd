@@ -17,6 +17,9 @@ function StallHome() {
   }
   useEffect(() => {
     fetchData();
+    axios.defaults.headers.common["Authorization"] = `Bearer ${
+      JSON.parse(localStorage.getItem("login")).token
+    }`;
   }, []);
 
   function onSearch(data) {
