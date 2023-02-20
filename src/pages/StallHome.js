@@ -9,13 +9,13 @@ function StallHome() {
   const [filteredReservations, setFilteredReservations] = useState([]);
   const user = JSON.parse(localStorage.getItem("login")).user;
 
+  async function fetchData() {
+    await axios.get(`api/v1/reservation/stall/${user}`).then(async (res) => {
+      setRservations(await res.data);
+      setFilteredReservations(await res.data);
+    });
+  }
   useEffect(() => {
-    async function fetchData() {
-      await axios.get(`api/v1/reservation/stall/${user}`).then(async (res) => {
-        setRservations(await res.data);
-        setFilteredReservations(await res.data);
-      });
-    }
     fetchData();
   }, []);
 
@@ -31,7 +31,10 @@ function StallHome() {
       </div>
       <div className="d-flex flex-column align-items-center p-2 ">
         {filteredReservations.length ? (
-          <ReservationTable reservations={filteredReservations} />
+          <ReservationTable
+            reservations={filteredReservations}
+            onComplete={fetchData}
+          />
         ) : (
           <p>No Reservation Found</p>
         )}

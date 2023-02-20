@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "../api/axios";
 
 export default function ReservationRow(props) {
@@ -9,14 +8,13 @@ export default function ReservationRow(props) {
     stallEmail: props.stallEmail,
     userEmail: props.userEmail,
   };
-  const history = useHistory();
 
   async function completeHandler() {
     await axios
       .delete("/api/v1/reservation/complete", { data: reservation })
       .then(async (res) => {
         console.log(await res.data);
-        history.go(0);
+        props.onComplete();
       });
   }
 

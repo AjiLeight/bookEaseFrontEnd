@@ -11,6 +11,10 @@ function Cart() {
     reservationCtx.getReservations(user);
   }, []);
 
+  async function refreshReservations() {
+    reservationCtx.getReservations(user);
+  }
+
   return (
     <>
       <MainNavigation />
@@ -19,7 +23,11 @@ function Cart() {
           <>Reservations are empty</>
         ) : (
           reservationCtx.reservations.map((reservation) => (
-            <CartItems key={reservation.bookId} reservation={reservation} />
+            <CartItems
+              key={reservation.bookId}
+              reservation={reservation}
+              onCancel={refreshReservations}
+            />
           ))
         )}
       </div>

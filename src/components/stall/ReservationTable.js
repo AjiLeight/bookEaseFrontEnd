@@ -10,6 +10,7 @@ function ReservationTable(props) {
           date={reservation.date}
           stallEmail={reservation.stallEmail}
           userEmail={reservation.userEmail}
+          onComplete={props.onComplete}
         />
       ))}
     </>

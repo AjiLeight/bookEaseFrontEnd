@@ -22,29 +22,31 @@ function LoginCard() {
     };
 
     await axios
-      .post("/api/auth/login", userData)
-      .then((res) => {
-        const role = res.data.role;
+      .post("/api/auth/login", userData, { headers: { Authorization: "" } })
+      .then(async (res) => {
+        const role = await res.data.role;
+        const token = await res.data.accessToken;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         localStorage.setItem(
           "login",
           JSON.stringify({
             login: "true",
-            token: res.data.accessToken,
+            token: token,
             role: role,
             user: enteredEmail,
           })
         );
-        console.log(res);
-        if (role === "CUSTOMER") {
-          history.push("/user-home");
-        } else {
-          history.push("/stall-home");
+        if (localStorage.getItem("login")) {
+          if (role === "CUSTOMER") {
+            history.push("/user-home");
+          } else {
+            history.push("/stall-home");
+          }
         }
       })
       .catch((error) => {
-        const message = error.response.data.message;
-        console.log(message);
-        if (message === "Bad credentials") {
+        const status = error.response.status;
+        if (status === 401) {
           setErrorMessage("Wrong Username or Password");
         }
       });
@@ -58,7 +60,7 @@ function LoginCard() {
         </label>
         <input
           className="form-control align-self-start mb-2"
-          type="text"
+          type="email"
           placeholder="email"
           ref={emailRef}
           id="username"
