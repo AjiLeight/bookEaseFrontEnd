@@ -1,14 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "../api/axios";
 import ReservationContext from "../../store/reservation-context";
-import { useHistory } from "react-router-dom";
 
-export default function CartItems({ reservation }) {
+export default function CartItems({ reservation, onCancel }) {
   const [book, setbook] = useState({});
   const [stall, setStall] = useState({});
   const reservationCtx = useContext(ReservationContext);
   const user = JSON.parse(localStorage.getItem("login")).user;
-  const history = useHistory();
 
   useEffect(() => {
     async function getBookDetails() {
@@ -38,7 +36,7 @@ export default function CartItems({ reservation }) {
     };
     console.log(data);
     await reservationCtx.cancelReservation(data, user);
-    history.go(0);
+    onCancel();
   }
 
   return (

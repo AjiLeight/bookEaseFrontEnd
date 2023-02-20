@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "../api/axios";
 import { useHistory } from "react-router-dom";
 
 export default function UserSignup() {
   const history = useHistory();
+  const [authError, setAuthError] = useState(false);
+  const [authErrorResponse, setAuthErrorResponse] = useState("");
 
   const nameRef = useRef();
   const emailRef = useRef();
@@ -22,23 +24,37 @@ export default function UserSignup() {
       password: enteredPassword,
     };
 
-    axios.post("/api/auth/register-user", userData).then((res) => {
-      localStorage.setItem(
-        "login",
-        JSON.stringify({
-          login: "true",
-          token: res.data.accessToken,
-          role: "CUSTOMER",
-          user: enteredEmail,
-        })
-      );
-      console.log(res);
-      history.push("/user-home");
-    });
+    axios
+      .post("/api/auth/register-user", userData, {
+        headers: { Authorization: "" },
+      })
+      .then(async (res) => {
+        const token = await res.data.accessToken;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        localStorage.setItem(
+          "login",
+          JSON.stringify({
+            login: "true",
+            token: res.data.accessToken,
+            role: "CUSTOMER",
+            user: enteredEmail,
+          })
+        );
+        console.log(res);
+        history.push("/user-home");
+      })
+      .catch((error) => {
+        setAuthError(true);
+        setAuthErrorResponse(error.response.data.accessToken);
+      });
   }
 
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        signupHandler(e);
+      }}
+    >
       <label htmlFor="name" className="mb-2">
         Name
       </label>
@@ -53,7 +69,7 @@ export default function UserSignup() {
         Email
       </label>
       <input
-        type="text"
+        type="email"
         className="form-control align-self-start mb-2"
         id="email"
         ref={emailRef}
@@ -69,9 +85,10 @@ export default function UserSignup() {
         ref={passwordRef}
         required
       ></input>
-      <button className="btn btn-outline-primary mt-2" onClick={signupHandler}>
+      <button type="submit" className="btn btn-outline-primary mt-2">
         SignUp
       </button>
+      {authError ? <div>{authErrorResponse}</div> : <></>}
     </form>
   );
 }

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "../api/axios";
 
 export default function AddBookElement() {
@@ -8,10 +8,8 @@ export default function AddBookElement() {
   const publicationRef = useRef();
   const priceRef = useRef();
   const stockRef = useRef();
-  const [savedBook, setSavedBook] = useState({});
   const [bookSaved, setBookSaved] = useState(false);
   const user = JSON.parse(localStorage.getItem("login")).user;
-  const history = useHistory();
 
   async function saveHandler() {
     const book = {
@@ -22,22 +20,22 @@ export default function AddBookElement() {
     };
 
     await axios.post("/api/v1/book/save-book", book).then(async (res) => {
-      setSavedBook(await res.data);
-      setBookSaved(true);
-    });
-
-    if (bookSaved) {
+      const bookData = await res.data;
+      console.log(bookData);
       const stock = {
-        bookId: savedBook.id,
+        bookId: bookData.id,
         email: user,
         amount: parseInt(stockRef.current.value),
       };
-
       axios.post("/api/v1/stock", stock).then((res) => {
         console.log(res.data);
-        history.go("/stall-home");
+        setBookSaved(true);
       });
-    }
+    });
+  }
+
+  function toggleSaved() {
+    setBookSaved(false);
   }
 
   return (
@@ -46,7 +44,12 @@ export default function AddBookElement() {
         <div className="card-body">
           <h3 className="fw-bold">Add Book</h3>
           <label htmlFor="name">Name :</label>
-          <input type="text" className="form-control mb-2" ref={nameRef} />
+          <input
+            type="text"
+            className="form-control mb-2"
+            ref={nameRef}
+            onClick={toggleSaved}
+          />
           <label htmlFor="author">Author :</label>
           <input type="text" className="form-control mb-2" ref={authorRef} />
           <label htmlFor="publication">Publication :</label>
@@ -75,6 +78,15 @@ export default function AddBookElement() {
           >
             SAVE
           </button>
+          <div>
+            {bookSaved ? (
+              <span className="fs-4 text-success">Book Saved</span>
+            ) : (
+              <></>
+            )}
+            <br />
+            <Link to={"/stock-mgmt"}>Back to Stock</Link>
+          </div>
         </div>
       </div>
     </>

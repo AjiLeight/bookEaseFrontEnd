@@ -7,6 +7,7 @@ import UserHome from "./pages/UserHome";
 import Stock from "./pages/Stock";
 import Cart from "./pages/Cart";
 import AddBook from "./pages/AddBook";
+import ErrorPage from "./error/ErrorPage";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
       </Route>
       <Route path="/add-book" exact>
         <AddBook />
+      </Route>
+      <Route path="/error" exact>
+        <ErrorPage></ErrorPage>
       </Route>
     </Switch>
   );
